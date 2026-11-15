@@ -1,0 +1,4 @@
+{
+  // VS Code suggests these extensions when someone opens this folder.
+  "recommendations": ["esbenp.prettier-vscode", "usernamehw.errorlens"]
+}

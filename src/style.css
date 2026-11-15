@@ -1,0 +1,149 @@
+/* ============================================================
+   THE LOOK OF THE GAME
+   ============================================================ */
+
+/* Colour "variables": define each colour once, use it everywhere.
+   Changing a colour here changes it across the whole site. */
+:root {
+  --page-bg: #f4f1ea;
+  --text: #1f2328;
+  --muted: #5d6470;
+  --tile-bg: #ffffff;
+  --tile-text: #1f2328;
+  --tile-solved: #2e9e5b;
+  --accent: #3a5bd9;
+  --button-text: #ffffff;
+  font-family: system-ui, "Segoe UI", sans-serif;
+}
+
+/* Dark colours when the computer is set to dark mode. */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --page-bg: #16181d;
+    --text: #e8e6e3;
+    --muted: #9aa1ad;
+    --tile-bg: #262a33;
+    --tile-text: #e8e6e3;
+    --tile-solved: #2e9e5b;
+    --accent: #6f8cff;
+    --button-text: #0d0f14;
+  }
+}
+
+body {
+  margin: 0;
+  background: var(--page-bg);
+  color: var(--text);
+}
+
+/* Centre everything in one column with 16px space at the sides. */
+.app {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 24px 16px;
+  text-align: center;
+}
+
+h1 {
+  margin: 0 0 16px;
+}
+
+.controls {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+}
+
+select,
+#new-game {
+  font: inherit;
+  padding: 6px 12px;
+  border-radius: 8px;
+}
+
+#new-game {
+  border: none;
+  background: var(--accent);
+  color: var(--button-text);
+  cursor: pointer;
+}
+
+.status {
+  display: flex;
+  justify-content: space-between;
+  min-height: 1.5em;
+  color: var(--muted);
+}
+
+#message {
+  color: var(--tile-solved);
+  font-weight: bold;
+}
+
+/* The board is a square grid with --size columns (set by board.ts). */
+.board {
+  --board-width: min(100%, 420px);
+  position: relative; /* lets the turn buttons be placed on top of it */
+  width: var(--board-width);
+  aspect-ratio: 1; /* height = width, so it stays square */
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(var(--size), 1fr);
+}
+
+.tile {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tile-bg);
+  color: var(--tile-text);
+  /* A transparent border creates the gap between tiles, so the
+     corners where tiles meet line up exactly with the turn buttons. */
+  border: 4px solid transparent;
+  background-clip: padding-box;
+  border-radius: 12px;
+  font-size: calc(420px / var(--size) * 0.4);
+  font-weight: bold;
+  user-select: none; /* stops letters getting highlighted on fast clicks */
+}
+
+/* Smaller letters on narrow (phone) screens. */
+@media (max-width: 460px) {
+  .tile {
+    font-size: calc(90vw / var(--size) * 0.4);
+  }
+}
+
+.board.solved .tile {
+  background-color: var(--tile-solved);
+  color: #ffffff;
+}
+
+.turn-button {
+  position: absolute;
+  width: 44px; /* 44px is a comfortable size to tap with a finger */
+  height: 44px;
+  transform: translate(-50%, -50%); /* put the centre on the corner */
+  border: none;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--button-text);
+  font-size: 22px;
+  cursor: pointer;
+  opacity: 0.85;
+}
+
+.turn-button:hover {
+  opacity: 1;
+}
+
+.turn-button:disabled {
+  display: none; /* hide the buttons once the puzzle is solved */
+}
+
+.help {
+  color: var(--muted);
+  font-size: 14px;
+  margin-top: 20px;
+}

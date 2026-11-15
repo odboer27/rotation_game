@@ -1,0 +1,6 @@
+{
+  // These settings only apply when this folder is open in VS Code,
+  // so your other projects are not affected.
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true
+}

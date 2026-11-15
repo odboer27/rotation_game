@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rotation Puzzle</title>
+  </head>
+  <body>
+    <main class="app">
+      <h1>Rotation Puzzle</h1>
+
+      <div class="controls">
+        <label>
+          Grid size
+          <select id="size-select">
+            <option value="3" selected>3 × 3</option>
+            <option value="4">4 × 4</option>
+            <option value="5">5 × 5</option>
+          </select>
+        </label>
+        <button id="new-game" type="button">New game</button>
+      </div>
+
+      <p class="status">
+        <span id="moves">Moves: 0</span>
+        <span id="message"></span>
+      </p>
+
+      <!-- The tiles and turn buttons are added here by src/ui/board.ts -->
+      <div id="board" class="board"></div>
+
+      <p class="help">
+        Put the letters back in alphabetical order. Click a ⟳ button to turn the 4 tiles around it
+        clockwise; right-click to turn them counter-clockwise.
+      </p>
+    </main>
+
+    <!-- Load our TypeScript code. Vite translates it for the browser. -->
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
