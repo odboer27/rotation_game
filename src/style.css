@@ -11,7 +11,8 @@
   --tile-bg: #ffffff;
   --tile-text: #1f2328;
   --tile-solved: #2e9e5b;
-  --accent: #3a5bd9;
+  --accent: #2e9e5b; /* green: turn buttons and "New game" */
+  --accent-hover: #217545; /* darker green when the mouse is on a button */
   --button-text: #ffffff;
   font-family: system-ui, "Segoe UI", sans-serif;
 }
@@ -25,7 +26,8 @@
     --tile-bg: #262a33;
     --tile-text: #e8e6e3;
     --tile-solved: #2e9e5b;
-    --accent: #6f8cff;
+    --accent: #3fb871;
+    --accent-hover: #2e9e5b;
     --button-text: #0d0f14;
   }
 }
@@ -67,6 +69,10 @@ select,
   background: var(--accent);
   color: var(--button-text);
   cursor: pointer;
+}
+
+#new-game:hover {
+  background: var(--accent-hover);
 }
 
 .status {
@@ -115,6 +121,13 @@ select,
   }
 }
 
+/* While a tile travels around the ferris wheel, draw it above the
+   tiles it passes over. */
+.tile.moving {
+  position: relative;
+  z-index: 1;
+}
+
 .board.solved .tile {
   background-color: var(--tile-solved);
   color: #ffffff;
@@ -122,20 +135,21 @@ select,
 
 .turn-button {
   position: absolute;
-  width: 44px; /* 44px is a comfortable size to tap with a finger */
-  height: 44px;
+  z-index: 2; /* always above the tiles, even moving ones */
+  width: 36px; /* still big enough to tap with a finger */
+  height: 36px;
   transform: translate(-50%, -50%); /* put the centre on the corner */
   border: none;
   border-radius: 50%;
   background: var(--accent);
   color: var(--button-text);
-  font-size: 22px;
+  font-size: 18px;
   cursor: pointer;
-  opacity: 0.85;
+  transition: background 0.15s; /* fade smoothly to the hover colour */
 }
 
 .turn-button:hover {
-  opacity: 1;
+  background: var(--accent-hover);
 }
 
 .turn-button:disabled {
